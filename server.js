@@ -10,9 +10,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
+const authRoutes = require("./routes/authRoutes");
+
+app.use("/api/auth", authRoutes);
 
 const port = process.env.PORT || 5000;
 
