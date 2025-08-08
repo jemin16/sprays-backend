@@ -11,8 +11,12 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 const authRoutes = require("./routes/authRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
+const productRoutes = require("./routes/productRoutes");
 
 app.use("/api/auth", authRoutes);
+app.use("/api/category", categoryRoutes);
+app.use("/api/product", productRoutes);
 
 const port = process.env.PORT || 5000;
 
