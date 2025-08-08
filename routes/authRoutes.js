@@ -8,6 +8,6 @@ const { register, login, verifyOTP, getAllUsers } = require("../controllers/auth
 router.post("/register", register);
 router.post("/login", login);
 router.post("/verify-otp", verifyOTP);
-router.get("/users", authenticate, isAdmin, getAllUsers);
+router.get("/admin/users", authenticate, isAdmin, getAllUsers);
 
 module.exports = router;
