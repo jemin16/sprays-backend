@@ -10,11 +10,19 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-const authRoutes = require("./routes/authRoutes");
+const { createDefaultAdmin } = require("./controllers/adminController");
+(async () => {
+    await createDefaultAdmin();
+})();
+
+const adminRoutes = require("./routes/adminRoutes");
+const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
 
-app.use("/api/auth", authRoutes);
+
+app.use("/api/admin", adminRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 
