@@ -31,8 +31,8 @@ exports.verifyOTP = async (req, res) => {
     const { email, otp } = req.body;
 
     try {
-        const [result] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-        const user = result[0];
+        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        const user = rows[0];
 
         if (!user) return res.status(404).json({ message: 'User not found' });
 
@@ -44,32 +44,46 @@ exports.verifyOTP = async (req, res) => {
             return res.status(400).json({ message: 'OTP expired' });
         }
 
-        await db.query('UPDATE users SET is_verified = 1, otp_code = NULL, otp_expires_at = NULL WHERE id = ?', [user.id]);
-        res.json({ message: 'Email verified successfully' });
+        await db.query(
+            'UPDATE users SET is_verified = 1, otp_code = NULL, otp_expires_at = NULL WHERE id = ?',
+            [user.id]
+        );
 
+        res.json({ message: 'Email verified successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
 
+
 exports.login = async (req, res) => {
     const { email, password } = req.body;
+
     try {
-        const [[user]] = await db.query('CALL login_user(?)', [email]);
+        const [rows] = await db.query('CALL login_user(?)', [email]);
+        const user = rows[0] && rows[0][0];
+
         if (!user) return res.status(404).json({ message: 'User not found' });
-        if (!user.is_verified) {
+
+        if (Number(user.is_verified) !== 1) {
             return res.status(403).json({ message: "Email not verified. Please complete OTP verification." });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign(
+            { id: user.id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '1d' }
+        );
+
         res.json({ token, role: user.role });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
 
 exports.getAllUsers = async (req, res) => {
     try {
