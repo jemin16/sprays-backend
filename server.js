@@ -22,7 +22,7 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const variantRoutes = require("./routes/variantRoutes");
-
+const variantImageRoutes = require("./routes/variantImageRoutes");
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
@@ -30,6 +30,7 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/variant", variantRoutes);
+app.use("/api/variantImage", variantImageRoutes);
 
 const port = process.env.PORT || 5000;
 
