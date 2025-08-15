@@ -1,0 +1,6 @@
+DELIMITER //
+CREATE PROCEDURE deleteBlog(IN p_id INT)
+BEGIN
+    DELETE FROM blogs WHERE id = p_id;
+END //
+DELIMITER ;

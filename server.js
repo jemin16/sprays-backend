@@ -23,6 +23,8 @@ const productRoutes = require("./routes/productRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const variantRoutes = require("./routes/variantRoutes");
 const variantImageRoutes = require("./routes/variantImageRoutes");
+const blogRoutes = require("./routes/blogRoutes");
+const blogCommentRoutes = require("./routes/blogCommentsRoutes");
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
@@ -31,6 +33,8 @@ app.use("/api/product", productRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/variant", variantRoutes);
 app.use("/api/variantImage", variantImageRoutes);
+app.use("/api/blog", blogRoutes);
+app.use("/api/blogComment", blogCommentRoutes);
 
 const port = process.env.PORT || 5000;
 
