@@ -25,6 +25,8 @@ const variantRoutes = require("./routes/variantRoutes");
 const variantImageRoutes = require("./routes/variantImageRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const blogCommentRoutes = require("./routes/blogCommentsRoutes");
+const faqsRoutes = require("./routes/faqsRoutes");
+const filterRoutes = require("./routes/filterRoutes");
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
@@ -35,6 +37,8 @@ app.use("/api/variant", variantRoutes);
 app.use("/api/variantImage", variantImageRoutes);
 app.use("/api/blog", blogRoutes);
 app.use("/api/blogComment", blogCommentRoutes);
+app.use("/api/faqs", faqsRoutes);
+app.use("/api/filter", filterRoutes);
 
 const port = process.env.PORT || 5000;
 

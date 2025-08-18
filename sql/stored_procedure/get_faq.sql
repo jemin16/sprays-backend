@@ -1,0 +1,6 @@
+DELIMITER //
+CREATE PROCEDURE get_faq()
+BEGIN
+    SELECT * FROM faqs;
+END //
+DELIMITER ;
