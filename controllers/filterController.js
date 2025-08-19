@@ -37,7 +37,7 @@ exports.getProducts = async (req, res) => {
         }
 
         if (minPrice && maxPrice) {
-            query += " AND v.discount_price BETWEEN ? AND ?";
+            query += " AND v.original_price BETWEEN ? AND ?";
             params.push(minPrice, maxPrice);
         }
 
