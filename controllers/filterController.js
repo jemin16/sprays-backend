@@ -62,6 +62,6 @@ exports.getProducts = async (req, res) => {
         res.json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Server error" });
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
